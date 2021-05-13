@@ -1,0 +1,27 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.body {
+	display: flex;
+	background-color: #f8dac8;
+	font-family: Arial;
+	cursor: context-menu;
+	flex-wrap: nowrap;
+	height: 100vh;
+}
+
+.main_color {
+	color: #a6b6cf;
+}
+
+.size-20 {
+	font-size: 20px !important;
+}
+@media (max-width: 1024px) {
+	.size-20 {
+		font-size: 15px !important;
+	}
+}

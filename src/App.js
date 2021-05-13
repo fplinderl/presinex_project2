@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import { Redirect, Route, Switch } from 'react-router';
 import './App.css';
+import Start from './Components/start';
+import Home from './Components/home';
+import { useSelector } from 'react-redux';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const loginUser = useSelector((state) => state.user.current);
+	const isLogin = !!loginUser.email;
+	return (
+		<Switch>
+			{!isLogin ? (
+				<>
+					<Redirect from='/' to='/' />
+					<Route path='/' component={Start} exact />
+				</>
+			) : (
+				<>
+					<Redirect from='/' to='/home' />
+					<Route path='/home' component={Home} exact />
+				</>
+			)}
+		</Switch>
+	);
 }
 
 export default App;
