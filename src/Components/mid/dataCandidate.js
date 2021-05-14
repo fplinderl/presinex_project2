@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../Firebase/conect';
 import Candidate from './candidate';
+import Create from './create';
 import Search from './search';
 function DataCandidate(props) {
 	const [dataCandidates, setDataCandidates] = useState([]);
+	const [reRender, setReRender] = useState(Math.random());
 	const [dataShow, setDataShow] = useState([]);
 	const [dataPosition, setDataPosition] = useState([]);
 	const [search, setSearch] = useState(['', '', '', [], 'all']);
+	const [load, setLoad] = useState(false);
 	useEffect(() => {
 		const candidates = [];
 		const positions = [];
@@ -26,8 +29,11 @@ function DataCandidate(props) {
 				setDataCandidates(candidates);
 				setDataShow(candidates);
 				setDataPosition(positions);
+				if (load) {
+					setLoad(false);
+				}
 			});
-	}, []);
+	}, [load]);
 	const handleSearch = (values) => {
 		let fakeSearch = [...search];
 		fakeSearch[0] = values.name;
@@ -96,11 +102,19 @@ function DataCandidate(props) {
 		}
 		setDataShow(dataShowToSearch);
 	}, [search, dataCandidates]);
+	const reLoad = () => {
+		setLoad(true);
+	};
+	const clickReRender = () => {
+		setReRender(Math.random());
+	};
 	return (
 		<>
 			<div className='content_header'>
 				<p>{dataShow.length} Candidates</p>
-				<p className='size-20 main_color'>Clear results</p>
+				<p className='size-20'>
+					<Create reLoad={reLoad} reRender={clickReRender} ok={reRender} />
+				</p>
 			</div>
 			<Search handleSearch={handleSearch} positions={dataPosition}></Search>
 			<div className='content_people'>
@@ -114,6 +128,7 @@ function DataCandidate(props) {
 							favorite={item.favorite}
 							calendar={item.calendar}
 							id={item.id}
+							reLoad={reLoad}
 						/>
 					))
 				) : (

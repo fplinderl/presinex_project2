@@ -1,6 +1,7 @@
 const firebase = require('firebase');
 require('firebase/firestore');
 require('firebase/auth');
+require('firebase/storage');
 var firebaseConfig = {
 	apiKey: 'AIzaSyDp2jc0xfhTnfkL_PgAB_3PsxDtlVJJy5Q',
 	authDomain: 'project2-loc.firebaseapp.com',
@@ -13,23 +14,28 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 var auth = firebase.auth();
+var storage = firebase.storage();
 // console.log(
 // 	new Date(Math.floor(Math.random() * (1640710800000 - 1612112400000)) + 1612112400000).toDateString()
 // );
 //---------1640710800000-----------1612112400000
-db
-	.collection('user')
-	.doc('Z0EfBBGd6apoQfDkabPs')
-	.update({
-		favorite: true,
-	})
-	.then(() => {
-		console.log('Document successfully updated!');
-	})
-	.catch((error) => {
-		// The document probably doesn't exist.
-		console.error('Error updating document: ', error);
-	});
+// db
+// 	.collection('user')
+// 	.get()
+// 	.then((querySnapshot) => {
+// 		querySnapshot.forEach((doc) => {
+// 			db
+// 				.collection('user')
+// 				.doc(doc.id)
+// 				.delete()
+// 				.then(() => {
+// 					console.log('Document successfully deleted!');
+// 				})
+// 				.catch((error) => {
+// 					console.error('Error removing document: ', error);
+// 				});
+// 		});
+// 	});
 
 // db
 // 	.collection('user')
@@ -101,3 +107,19 @@ db
 // 			console.error('Error adding document: ', error);
 // 		});
 // }
+// var storageRef = storage.ref();
+// var desertRef = storageRef.child(
+// 	'https://firebasestorage.googleapis.com/v0/b/project2-loc.appspot.com/o/Estelle_Mills.png?alt=media&token=7538d6f7-b1bf-4053-be82-795a0e40c1b6'
+// );
+
+// desertRef
+// 	.delete()
+// 	.then(() => {
+// 		// File deleted successfully
+// 	})
+// 	.catch((error) => {
+// 		// Uh-oh, an error occurred!
+// 	});
+var string =
+	'https://firebasestorage.googleapis.com/v0/b/project2-loc.appspot.com/o/Elmer_Cobb.png?alt=media&token=25c630e4-b115-4b4e-9de1-3b1129e645dd';
+console.log(string.slice(string.indexOf('/o/') + 3, string.indexOf('.png') + 4));
