@@ -1,22 +1,18 @@
 import {
 	Avatar,
 	Button,
-	Checkbox,
 	Dialog,
 	DialogActions,
 	DialogContent,
-	DialogTitle,
-	FormControlLabel,
 	makeStyles,
 	TextField,
 } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import firebase from 'firebase/app';
-import { storage } from '../../Firebase/conect';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { db } from '../../Firebase/conect';
+import { db, storage } from '../../Firebase/conect';
 import './index.css';
 Candidate.propTypes = {
 	avatar: PropTypes.string,
